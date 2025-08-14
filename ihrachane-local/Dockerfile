@@ -34,40 +34,28 @@ RUN echo '<VirtualHost *:80>\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
 # Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 # Copy existing application directory contents
-COPY . /var/www
-
-# Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www
+COPY . /var/www/html
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Install Node dependencies and build assets
 RUN npm ci && npm run build
 
 # Set proper permissions for Laravel
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www \
-    && chmod -R 775 /var/www/storage \
-    && chmod -R 775 /var/www/bootstrap/cache
-
-# Create basic .env file (will be overwritten by entrypoint)
-RUN echo "APP_NAME=ihrachane" > /var/www/.env \
-    && echo "APP_ENV=production" >> /var/www/.env \
-    && echo "APP_DEBUG=false" >> /var/www/.env \
-    && echo "APP_KEY=base64:Edr0vS4NJ8ZsNdqGhrwCsZBe/eJBT/+ZMovLBMO0PEk=" >> /var/www/.env
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html \
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache
 
 # Make entrypoint script executable
-RUN chmod +x /var/www/docker-entrypoint.sh
-
-# Change current user to www-data
-USER www-data
+RUN chmod +x /var/www/html/docker-entrypoint.sh
 
 # Expose port 80
 EXPOSE 80
 
-# Use custom entrypoint script
-CMD ["/var/www/docker-entrypoint.sh"]
+# Use custom entrypoint script (run as root for setup, then switch to www-data)
+CMD ["/var/www/html/docker-entrypoint.sh"]
