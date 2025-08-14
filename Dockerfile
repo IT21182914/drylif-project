@@ -22,6 +22,17 @@ RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Configure Apache
+RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+RUN a2enmod rewrite
+RUN echo '<VirtualHost *:80>\n\
+    DocumentRoot /var/www/public\n\
+    <Directory /var/www/public>\n\
+        AllowOverride All\n\
+        Require all granted\n\
+    </Directory>\n\
+</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+
 # Set working directory
 WORKDIR /var/www
 
