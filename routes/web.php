@@ -20,12 +20,29 @@ Route::get('/', [SiteController::class, 'index'])->name('site.index');
 
 // Debug route for troubleshooting
 Route::get('/test', function () {
+    try {
+        // Test database connection
+        $dbName = DB::connection()->getDatabaseName();
+        $dbConnected = true;
+        
+        // Test a simple query
+        $userCount = DB::table('users')->count();
+        
+    } catch (Exception $e) {
+        $dbName = 'Not connected';
+        $dbConnected = false;
+        $userCount = 'N/A';
+    }
+    
     return response()->json([
         'status' => 'success',
         'message' => 'Laravel is working!',
         'php_version' => phpversion(),
         'laravel_version' => app()->version(),
-        'database_connection' => DB::connection()->getDatabaseName(),
+        'database_connected' => $dbConnected,
+        'database_name' => $dbName,
+        'user_count' => $userCount,
+        'environment' => app()->environment(),
         'timestamp' => now()
     ]);
 });
