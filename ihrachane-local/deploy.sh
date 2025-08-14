@@ -1,6 +1,13 @@
 #!/bin/bash
 
-echo "🚀 Starting deployment process..."
+echo "🚀 Starting Render deployment process..."
+
+# Install PHP dependencies
+composer install --no-dev --optimize-autoloader
+
+# Install Node.js dependencies and build assets
+npm ci
+npm run build
 
 # Clear configuration cache
 php artisan config:clear
@@ -18,4 +25,4 @@ php artisan view:cache
 # Create storage link if it doesn't exist
 php artisan storage:link
 
-echo "✅ Deployment completed successfully!"
+echo "✅ Render deployment completed successfully!"
