@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: ihrachane-app
+    runtime: php
+    buildCommand: composer install --no-dev --optimize-autoloader && npm ci && npm run build
+    startCommand: vendor/bin/heroku-php-apache2 public/
+    envVars:
+      - key: APP_NAME
+        value: ihrachane
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        value: base64:Edr0vS4NJ8ZsNdqGhrwCsZBe/eJBT/+ZMovLBMO0PEk=
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ihrachane-db
+          property: connectionString
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: LOG_LEVEL
+        value: error
+
+databases:
+  - name: ihrachane-db
+    databaseName: ihrachane
