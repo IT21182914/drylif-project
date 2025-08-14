@@ -14,6 +14,19 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
+// Simple test route for debugging
+Route::get('/test', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Laravel is working!',
+        'timestamp' => now(),
+        'environment' => app()->environment(),
+        'database' => [
+            'connection' => config('database.default'),
+            'status' => 'checking...'
+        ]
+    ]);
+});
 
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
 Route::get('sourcing', [SiteController::class, 'sourcing'])->name('site.sourcing');
