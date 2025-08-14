@@ -13,9 +13,23 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
+
+// Debug route for troubleshooting
+Route::get('/test', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Laravel is working!',
+        'php_version' => phpversion(),
+        'laravel_version' => app()->version(),
+        'database_connection' => DB::connection()->getDatabaseName(),
+        'timestamp' => now()
+    ]);
+});
+
 Route::get('sourcing', [SiteController::class, 'sourcing'])->name('site.sourcing');
 Route::get('shipping', [SiteController::class, 'shipping'])->name('site.shipping');
 Route::get('shipping/{slug}', [SiteController::class, 'subCategoryShow'])->name('site.subCategoryShow');

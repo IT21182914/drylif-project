@@ -43,10 +43,10 @@ COPY . /var/www
 COPY --chown=www-data:www-data . /var/www
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # Install Node dependencies and build assets
-RUN npm ci && npm run build
+RUN npm ci --only=production && npm run build
 
 # Set proper permissions for Laravel
 RUN chown -R www-data:www-data /var/www \
@@ -66,11 +66,8 @@ RUN php artisan key:generate --force
 # Make entrypoint script executable
 RUN chmod +x /var/www/docker-entrypoint.sh
 
-# Change current user to www-data
-USER www-data
-
 # Expose port 80
 EXPOSE 80
 
-# Use custom entrypoint script
+# Use custom entrypoint script (run as root for proper permissions)
 CMD ["/var/www/docker-entrypoint.sh"]
