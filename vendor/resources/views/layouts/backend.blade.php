@@ -77,8 +77,12 @@
                                     href="/profile"><i class="bx bx-user mr-50"></i> Edit Profile</a>
 
                                 <div class="dropdown-divider mb-0"></div>
-                                <a class="dropdown-item" href="auth-login.html"><i class="bx bx-power-off mr-50"></i>
-                                    Logout</a>
+                                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                                    @csrf
+                                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                        <i class="bx bx-power-off mr-50"></i> Logout
+                                    </a>
+                                </form>
                             </div>
                         </li>
                     </ul>
