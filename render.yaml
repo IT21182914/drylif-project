@@ -1,9 +1,9 @@
 services:
   - type: web
     name: ihrachane-app
-    runtime: php
-    buildCommand: composer install --no-dev --optimize-autoloader && npm ci && npm run build
-    startCommand: vendor/bin/heroku-php-apache2 public/
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     envVars:
       - key: APP_NAME
         value: ihrachane
