@@ -17,6 +17,8 @@
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="{{ asset('assets/owlcarousel/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/owlcarousel/owl.theme.default.min.css') }}">
+    <!-- Vite CSS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
 </head>
 
