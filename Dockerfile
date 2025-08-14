@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Install system dependencies
+# Install system dependencies including Node.js 18.x
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -10,8 +10,11 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     zip \
     unzip \
-    nodejs \
-    npm
+    wget
+
+# Install Node.js 18.x
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -36,17 +39,23 @@ RUN echo '<VirtualHost *:80>\n\
 # Set working directory
 WORKDIR /var/www
 
-# Copy existing application directory contents
-COPY . /var/www
+# Copy package.json and package-lock.json first for better caching
+COPY package*.json ./
 
-# Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www
+# Install Node dependencies (including dev dependencies for building)
+RUN npm ci
+
+# Copy the rest of the application
+COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Install Node dependencies and build assets
-RUN npm ci --only=production && npm run build
+# Build assets
+RUN npm run build
+
+# Remove dev dependencies to reduce image size
+RUN npm prune --production
 
 # Set proper permissions for Laravel
 RUN chown -R www-data:www-data /var/www \
