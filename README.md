@@ -1,262 +1,53 @@
-# Ihrachane - Laravel Business Application
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-A modern Laravel 11 business application for managing services, clients, and marketplace operations. Deployed on Render with PostgreSQL database.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## 🌟 Features
+## About Laravel
 
-- **Service Management**: Create and manage business services and categories
-- **Client Portfolio**: Manage client information and relationships
-- **Contact System**: Handle customer inquiries with marketplace integration
-- **Partner Management**: Maintain business partnerships
-- **Testimonials**: Showcase customer feedback
-- **Social Media Integration**: Connect social media accounts
-- **Admin Dashboard**: Complete backend management system
-- **Responsive Design**: Mobile-friendly interface
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## 🚀 Live Application
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-- **Production URL**: [https://ihrachane-app.onrender.com](https://ihrachane-app.onrender.com)
-- **Platform**: Render (Docker deployment)
-- **Database**: PostgreSQL
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## 🛠️ Technology Stack
+## Learning Laravel
 
-- **Backend**: Laravel 11 (PHP 8.2)
-- **Frontend**: Blade Templates, Bootstrap, JavaScript
-- **Database**: PostgreSQL
-- **Containerization**: Docker
-- **Deployment**: Render
-- **Version Control**: Git (GitHub)
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-## 📋 Prerequisites
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-- PHP 8.2 or higher
-- Composer
-- Node.js & NPM
-- PostgreSQL (for local development)
-- Docker (optional)
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## 🔧 Local Development Setup
+## Laravel Sponsors
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/IT21182914/drylif-project.git
-cd drylif-project
-```
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### 2. Install Dependencies
-```bash
-# Install PHP dependencies
-composer install
+### Premium Partners
 
-# Install Node.js dependencies
-npm install
-```
-
-### 3. Environment Configuration
-```bash
-# Copy environment file
-cp .env.example .env
-
-# Generate application key
-php artisan key:generate
-```
-
-### 4. Database Setup
-```bash
-# Configure your .env file with database credentials
-DB_CONNECTION=pgsql
-DB_HOST=your_host
-DB_PORT=5432
-DB_DATABASE=your_database
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
-
-# Run migrations
-php artisan migrate
-
-# Seed the database (optional)
-php artisan db:seed
-```
-
-### 5. Build Assets
-```bash
-npm run build
-```
-
-### 6. Start Development Server
-```bash
-php artisan serve
-```
-
-Visit `http://localhost:8000` to access the application.
-
-## 🐳 Docker Deployment
-
-The application includes a Dockerfile for containerized deployment:
-
-```bash
-# Build Docker image
-docker build -t ihrachane-app .
-
-# Run container
-docker run -p 80:80 ihrachane-app
-```
-
-## 📁 Project Structure
-
-```
-├── app/
-│   ├── Http/Controllers/    # Application controllers
-│   ├── Models/             # Eloquent models
-│   └── Providers/          # Service providers
-├── config/                 # Configuration files
-├── database/
-│   ├── migrations/         # Database migrations
-│   └── seeders/           # Database seeders
-├── public/                # Public assets
-├── resources/
-│   ├── views/             # Blade templates
-│   ├── css/               # Stylesheets
-│   └── js/                # JavaScript files
-├── routes/                # Application routes
-└── storage/               # File storage
-```
-
-## 🌐 Key Routes
-
-- `/` - Homepage
-- `/admin` - Admin dashboard (requires authentication)
-- `/contact` - Contact form
-- `/services` - Services listing
-- `/about` - About page
-
-## 📊 Database Schema
-
-### Main Tables
-- `users` - System users and administrators
-- `services` - Business services
-- `categories` - Service categories
-- `sub_categories` - Service subcategories
-- `clients` - Client information
-- `contacts` - Contact form submissions
-- `partners` - Business partners
-- `testimonials` - Customer testimonials
-- `social_media` - Social media links
-
-## 🔐 Authentication
-
-The application uses Laravel's built-in authentication system:
-- User registration and login
-- Password reset functionality
-- Admin panel access control
-
-## 🚀 Deployment
-
-### Render Deployment
-
-The application is configured for automatic deployment on Render:
-
-1. **Database**: PostgreSQL database is pre-configured
-2. **Environment Variables**: Set in Render dashboard
-3. **Build Process**: Automated via Docker
-4. **Domain**: Custom domain available
-
-### Environment Variables (Production)
-```
-APP_NAME=ihrachane
-APP_ENV=production
-APP_KEY=base64:Edr0vS4NJ8ZsNdqGhrwCsZBe/eJBT/+ZMovLBMO0PEk=
-APP_DEBUG=false
-APP_URL=https://ihrachane-app.onrender.com
-DATABASE_URL=postgresql://[credentials]
-DB_CONNECTION=pgsql
-SESSION_DRIVER=database
-CACHE_STORE=database
-QUEUE_CONNECTION=database
-LOG_LEVEL=error
-```
-
-## 🔄 Development Workflow
-
-1. **Feature Development**: Create feature branches from `main`
-2. **Testing**: Run local tests before pushing
-3. **Deployment**: Push to `master` branch for automatic deployment
-4. **Monitoring**: Check Render dashboard for deployment status
-
-## 📝 Available Commands
-
-```bash
-# Laravel Commands
-php artisan migrate          # Run database migrations
-php artisan db:seed          # Seed database
-php artisan cache:clear      # Clear application cache
-php artisan config:clear     # Clear config cache
-php artisan route:list       # List all routes
-
-# Asset Commands
-npm run dev                  # Development build
-npm run build               # Production build
-npm run watch               # Watch for changes
-
-# Docker Commands
-docker build -t ihrachane-app .    # Build Docker image
-docker run -p 80:80 ihrachane-app  # Run container
-```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **Permission Errors**: Ensure storage and cache directories are writable
-```bash
-chmod -R 755 storage
-chmod -R 755 bootstrap/cache
-```
-
-2. **Database Connection**: Verify database credentials in `.env`
-
-3. **Asset Loading**: Run `npm run build` after pulling changes
-
-4. **Application Key**: Generate new key with `php artisan key:generate`
-
-## 📈 Performance Optimization
-
-- **Caching**: Redis/Database caching enabled
-- **Asset Optimization**: Minified CSS/JS in production
-- **Database Indexing**: Optimized database queries
-- **Docker Multi-stage Build**: Efficient container builds
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit changes (`git commit -am 'Add new feature'`)
-4. Push to branch (`git push origin feature/new-feature`)
-5. Create Pull Request
-
-## 📄 License
-
-This project is proprietary software. All rights reserved.
-
-## 👥 Team
-
-- **Developer**: IT21182914
-- **Platform**: Render
-- **Repository**: [drylif-project](https://github.com/IT21182914/drylif-project)
-
-## 📞 Support
-
-For technical support or questions:
-- **GitHub Issues**: [Create an issue](https://github.com/IT21182914/drylif-project/issues)
-- **Email**: Contact through the application contact form
-
----
-
-**Last Updated**: August 2025  
-**Version**: 1.0.0  
-**Laravel Version**: 11.x  
-**PHP Version**: 8.2+
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
 ## Contributing
 
